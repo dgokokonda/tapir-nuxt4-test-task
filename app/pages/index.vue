@@ -1,15 +1,26 @@
-<script setup lang="ts"></script>
-
 <template>
-  <div class="main">
-    <h1>ТЕСТОВОЕ ЗАДАНИЕ</h1>
+  <div>
+    <main>
+      <section class="home">
+        <div class="home__container">
+          <h1 class="home__title">ТЕСТОВОЕ ЗАДАНИЕ</h1>
+          <NuxtLink to="/catalog" class="home__button"> В каталог </NuxtLink>
+        </div>
+      </section>
+    </main>
   </div>
 </template>
-<style lang="scss">
-.main {
-  h1 {
-    font-size: $font-size-h1;
-    font-weight: $font-weight-medium;
-  }
-}
+
+<script setup lang="ts">
+useHead({
+  title: "Главная | Тестовое задание",
+});
+
+definePageMeta({
+  layout: "default",
+});
+</script>
+
+<style lang="scss" scoped>
+@import "~/assets/styles/blocks/home.scss";
 </style>

@@ -1,36 +1,37 @@
 // Цвета
 $color-black: #000000;
-$color-gray: #6F6F6F;
-$color-light-gray: #F5F5F5;
+$color-gray: #6f6f6f;
+$color-gray-light: #f5f5f5;
 $color-white: #ffffff;
-$color-red: #FF0000;
+$color-red: #ff0000;
 
 // Шрифты
-$font-main: 'Golos Text', sans-serif;
+$font-main:
+  "Golos Text",
+  -apple-system,
+  BlinkMacSystemFont,
+  sans-serif;
+$font-medium:
+  "Golos Text Medium",
+  -apple-system,
+  BlinkMacSystemFont,
+  sans-serif;
+
 $font-size-base: 14px;
 $font-weight-normal: 400;
 $font-weight-medium: 500;
 
 // Заголовки
-$font-size-h1: 64px;   
-$font-size-h2: 42px;  
-$font-size-h3: 26px;      
-$font-size-h4: 24px;    
+$font-size-h1: 64px;
+$font-size-h2: 42px;
+$font-size-h3: 26px;
+$font-size-h4: 24px;
 
 // Текст
 $font-size-body: $font-size-base;
 
 // Интерактивные элементы
-$font-size-button: $font-size-base;   
-$font-size-product-name: 16px; 
-$font-size-product-name-xs: 12px;   
+$font-size-button: $font-size-base;
+$font-size-product-name: 16px;
+$font-size-product-name-xs: 12px;
 $font-size-price: $font-size-h4;
-
-// Брейкпоинты
-$breakpoints: (
-  'sm': 576px,
-  'md': 768px,
-  'lg': 992px,
-  'xl': 1200px,
-  'xxl': 1400px
-);

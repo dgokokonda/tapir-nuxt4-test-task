@@ -1,0 +1,47 @@
+.footer {
+  background-color: $color-black;
+  padding: 100px 0 100px;
+
+  @include media-up("desktop") {
+    padding: 60px 0 60px;
+  }
+
+  &__container {
+    @include container;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    grid-template-columns: repeat(4, 1fr);
+
+    @include media-up("desktop") {
+      grid-template-columns: repeat(1, 1fr);
+      gap: 60px;
+    }
+  }
+
+  &__col {
+    &-title {
+      color: $color-gray;
+      font-size: $font-size-base;
+      margin-bottom: 14px;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  &__link {
+    color: $color-white;
+    transition: color 0.2s;
+
+    &:hover {
+      color: $color-gray-light;
+    }
+  }
+}

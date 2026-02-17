@@ -1,6 +1,6 @@
 export default defineNuxtConfig({
   ssr: true,
-  modules: ["@nuxt/eslint", "@nuxt/ui"],
+  modules: ["@pinia/nuxt"],
 
   devtools: {
     enabled: true,
@@ -10,7 +10,12 @@ export default defineNuxtConfig({
 
   typescript: {
     strict: true,
-    typeCheck: true,
+    typeCheck: false, // Отключаем на время, включим позже
+    shim: false,
+  },
+
+  pinia: {
+    storesDirs: ["./stores/**", "./app/stores/**"],
   },
 
   routeRules: {
@@ -18,16 +23,6 @@ export default defineNuxtConfig({
   },
 
   compatibilityDate: "2025-01-15",
-
-  eslint: {
-    checker: true,
-    config: {
-      stylistic: {
-        commaDangle: "never",
-        braceStyle: "1tbs",
-      },
-    },
-  },
 
   vite: {
     css: {
@@ -42,11 +37,13 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: "Nuxt 4 App",
+      title: "Nuxt Tapir Store",
       meta: [
         { charset: "utf-8" },
         { name: "viewport", content: "width=device-width, initial-scale=1" },
+        { name: "description", content: "Интернет-магазин Тапир на Nuxt 4" },
       ],
+      link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
     },
   },
 

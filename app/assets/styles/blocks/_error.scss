@@ -1,0 +1,124 @@
+.error-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: $color-gray-light;
+  font-family: $font-main;
+
+  &__container {
+    max-width: 500px;
+    width: 100%;
+    padding: 40px 30px;
+    background-color: $color-white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    text-align: center;
+  }
+}
+
+.error {
+  &__code {
+    font-size: 80px;
+    font-weight: 700;
+    color: $color-black;
+    margin-bottom: 20px;
+    line-height: 1;
+
+    @include media-up("tablet") {
+      font-size: 100px;
+    }
+  }
+
+  &__title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: $color-black;
+
+    @include media-up("tablet") {
+      font-size: 28px;
+    }
+  }
+
+  &__message {
+    font-size: 16px;
+    color: $color-gray;
+    margin-bottom: 30px;
+    line-height: 1.5;
+
+    @include media-up("tablet") {
+      font-size: 18px;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 40px;
+
+    @include media-up("mobile") {
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+
+  &__button {
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 8px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &--primary {
+      background-color: $color-black;
+      color: $color-white;
+      border: none;
+    }
+
+    &--secondary {
+      background-color: transparent;
+      color: $color-black;
+      border: 1px solid $color-black;
+    }
+  }
+
+  &__links {
+    border-top: 1px solid $color-black;
+    padding-top: 30px;
+  }
+
+  &__links-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: $color-gray;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  &__links-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  &__link {
+    font-size: 15px;
+    color: $color-gray;
+    text-decoration: none;
+
+    &:hover {
+      color: $color-black;
+    }
+  }
+}

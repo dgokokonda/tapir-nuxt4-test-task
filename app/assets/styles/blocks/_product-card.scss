@@ -1,0 +1,94 @@
+.product-card {
+  display: block;
+  position: relative;
+  color: inherit;
+  overflow: hidden;
+
+  &:after {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 24px;
+    background-image: url("/images/favorite.svg");
+    background-size: 24px 24px;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    right: 10px;
+    top: 10.34px;
+    cursor: pointer;
+
+    @include media-up("desktop") {
+      top: 2px;
+      right: 2px;
+    }
+  }
+
+  &__image {
+    // aspect-ratio: 1;
+    margin-bottom: 31px;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-gray;
+
+    @include media-up("desktop") {
+      margin-bottom: 15px;
+      height: 93.1px;
+    }
+
+    img {
+      height: 100%;
+      -o-object-fit: contain;
+      object-fit: contain;
+      width: 100%;
+    }
+  }
+
+  &__price {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 5px;
+    cursor: auto;
+
+    @include media-up("desktop") {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 9px;
+    }
+  }
+
+  &__total-price {
+    font-family: $font-medium;
+    font-weight: $font-weight-medium;
+    font-size: $font-size-h4;
+    line-height: 17px;
+    margin-bottom: 1px;
+    cursor: auto;
+  }
+
+  &__installment {
+    font-family: $font-medium;
+    font-weight: $font-weight-medium;
+    color: $color-white;
+    line-height: 18px;
+    letter-spacing: -5%;
+    padding: 0 4px;
+    background-color: $color-black;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.12);
+    cursor: auto;
+  }
+
+  &__title {
+    font-size: $font-size-product-name;
+    height: 22px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @include media-up("desktop") {
+      font-size: $font-size-product-name-xs;
+    }
+  }
+}

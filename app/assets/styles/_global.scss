@@ -1,8 +1,16 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   font-family: $font-main;
   font-size: $font-size-base;
   font-weight: $font-weight-normal;
   color: $color-black;
+  min-height: 100vh;
+  background-color: $color-white;
 }
 
 h1,
@@ -30,4 +38,29 @@ button {
   border: none;
   padding: 0;
   cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: $color-black;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.container {
+  @include container;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  clip: rect(0 0 0 0);
 }

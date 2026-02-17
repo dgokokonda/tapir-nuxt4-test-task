@@ -1,0 +1,80 @@
+{
+  "total": 56,
+  "totalPages": 5,
+  "currentPage": 1,
+  "limit": 12,
+  "products": [
+    {
+      "id": 1,
+      "name": "Acronym x Nike Blazer Low “Night Maroon“",
+      "price": 5550,
+      "image": "https://test-task-api.tapir.ws/images/Mu4ekbQhbyAgAq2pAv0ilFp7.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Mizuno Racer Trail SE “Gray”",
+      "price": 9300,
+      "image": "https://test-task-api.tapir.ws/images/1BJNC3nnPTh6djXBnvCCxPlY.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Wales Bonner x adidas Samba Nylon “Wonder Clay/Royal Blue”",
+      "price": 14300,
+      "image": "https://test-task-api.tapir.ws/images/DnYpp0A1vHHq1geUjhJiNGP0.jpg"
+    },
+    {
+      "id": 4,
+      "name": "SALOMON XT-WHISPER “Black Asphalt”",
+      "price": 17150,
+      "image": "https://test-task-api.tapir.ws/images/EejsOvGFwpOYGMb4UkW6oMkg.jpg"
+    },
+    {
+      "id": 5,
+      "name": "adidas Adimule “Golden Beige Gum“",
+      "price": 9000,
+      "image": "https://test-task-api.tapir.ws/images/q5NMQqbV19aMsvO1lMdUcBMV.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Nike Air Max 90 Essential+ “Baroque Brown”",
+      "price": 10600,
+      "image": "https://test-task-api.tapir.ws/images/jWvqPV0oYye76Vsk6d7wZml4.jpg"
+    },
+    {
+      "id": 7,
+      "name": "New Balance NB 1906R “Lunar New Year”",
+      "price": 8800,
+      "image": "https://test-task-api.tapir.ws/images/QuMLfxwrTZFGaK1nNAXV1HL9.jpg"
+    },
+    {
+      "id": 8,
+      "name": "Saucony Kinvara 4 “Light Brown”",
+      "price": 10050,
+      "image": "https://test-task-api.tapir.ws/images/Fb6mamAPooLrG0aDdDPbTiu3.jpg"
+    },
+    {
+      "id": 9,
+      "name": "adidas Handball Spezial “Black Gum”",
+      "price": 9600,
+      "image": "https://test-task-api.tapir.ws/images/SriLX0xOryC7IUddpCYyXr3Q.jpg"
+    },
+    {
+      "id": 10,
+      "name": "Nike Dunk Low “Athletic Department - University Blue“",
+      "price": 7650,
+      "image": "https://test-task-api.tapir.ws/images/DWlNsdw4rJPWAjYmZx5gYuBY.jpg"
+    },
+    {
+      "id": 11,
+      "name": "STONE ISLAND x  New Balance NB 574",
+      "price": 16500,
+      "image": "https://test-task-api.tapir.ws/images/xm0jP7KyQkiBNNpsrcpf2M6j.jpg"
+    },
+    {
+      "id": 12,
+      "name": "Mizuno Wave Rider Beta GORE-TEX “Quiet Shade Vulcan”",
+      "price": 8650,
+      "image": "https://test-task-api.tapir.ws/images/m7Q98mwcgETOUfyUH3Vib4sR.jpg"
+    }
+  ]
+}

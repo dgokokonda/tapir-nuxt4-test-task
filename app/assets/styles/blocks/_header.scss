@@ -1,0 +1,95 @@
+.header {
+  background-color: $color-white;
+
+  &__container {
+    @include container;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+
+    @include media-up("desktop") {
+      height: 60px;
+    }
+  }
+
+  &__logo {
+    width: 42px;
+    height: 42px;
+    background-color: $color-red;
+
+    @include media-up("desktop") {
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  &__nav {
+    display: block;
+
+    @include media-up("desktop") {
+      display: none;
+    }
+  }
+
+  &__menu {
+    display: flex;
+    gap: 40px;
+    padding: 10px 24px;
+    background-color: $color-gray-light;
+  }
+
+  &__menu-link {
+    font-size: $font-size-base;
+    line-height: 20px;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 20px;
+  }
+
+  &__burger {
+    display: block;
+    width: 42px;
+    height: 42px;
+    background-color: $color-gray-light;
+    background-image: url("/images/burger.svg");
+    background-size: 24px 24px;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    padding: 8px;
+    opacity: 0;
+
+    @include media-up("desktop") {
+      opacity: 1;
+      width: 40px;
+      height: 40px;
+    }
+
+    span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: $color-black;
+      position: absolute;
+      left: 0;
+
+      &:nth-child(1) {
+        top: 6px;
+      }
+      &:nth-child(2) {
+        top: 12px;
+      }
+      &:nth-child(3) {
+        top: 18px;
+      }
+    }
+  }
+}
