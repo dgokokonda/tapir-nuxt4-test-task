@@ -1,10 +1,15 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="main">Main page</div>
+  <div class="main">
+    <h1>ТЕСТОВОЕ ЗАДАНИЕ</h1>
+  </div>
 </template>
 <style lang="scss">
 .main {
-  color: $color-black;
+  h1 {
+    font-size: $font-size-h1;
+    font-weight: $font-weight-medium;
+  }
 }
 </style>
