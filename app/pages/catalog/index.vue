@@ -4,7 +4,7 @@
       <div class="catalog-page__container">
         <h1 class="catalog-page__title">КАТАЛОГ</h1>
 
-        <div class="catalog-page__grid">
+        <div v-if="products?.length" class="catalog-page__grid">
           <UiProductCard
             v-for="product in products"
             :key="product.id"
@@ -38,10 +38,10 @@ const { products, loading, error, hasMore } = storeToRefs(productStore);
 const { loadMore, retry } = productStore;
 
 if (import.meta.server) {
-  await productStore.fetchFirstPage();
+  await productStore.fetchFirstPageSSR();
 } else {
   // На клиенте используем callOnce для предотвращения повторных запросов
-  await callOnce("fetch-products", productStore.fetchFirstPage);
+  await callOnce("fetch-products", productStore.fetchFirstPageSSR);
 }
 
 useHead({

@@ -1,6 +1,8 @@
 import { defineStore } from "pinia";
-import type { Product, ProductsResponse, FetchError } from "~/types/product";
+import type { Product, FetchError, ProductsResponse } from "~/types/product";
 import { API } from "@/constants/api";
+import { useProductsFetch } from "~/composables/useProductsFetch";
+import { H3Error } from "h3";
 
 export const useProductStore = defineStore("products", () => {
   const products = ref<Product[]>([]);
@@ -9,24 +11,27 @@ export const useProductStore = defineStore("products", () => {
   const page = ref<number>(1);
   const limit = ref<number>(API.LIMIT);
   const hasMore = ref<boolean>(true);
-  const total = ref<number>(0);
-  const totalPages = ref<number>(0);
 
-  const isLoading = computed(() => loading.value);
-  const hasError = computed(() => error.value !== null);
-  const productsCount = computed(() => products.value.length);
+  const { fetchProductsSSR, fetchProductsClient } = useProductsFetch();
 
-  const buildApiUrl = (pageNum: number): string => {
-    const url = new URL(`${API.BASE_URL}${API.PRODUCTS}`);
-    url.searchParams.append("page", pageNum.toString());
-    url.searchParams.append("limit", limit.value.toString());
+  const fetchProductsWithSSR = async (pageNum: number) => {
+    const result = await fetchProductsSSR(pageNum, limit.value);
 
-    return url.toString();
+    if (result.error) {
+      throw result.error;
+    }
+
+    return result.data;
+  };
+
+  const fetchProductsWithClient = async (pageNum: number) => {
+    return await fetchProductsClient(pageNum, limit.value);
   };
 
   const fetchProducts = async (
     pageNum: number = page.value,
     append: boolean = true,
+    ssr: boolean = false,
   ) => {
     if (loading.value) return;
 
@@ -34,8 +39,14 @@ export const useProductStore = defineStore("products", () => {
     error.value = null;
 
     try {
-      const url = buildApiUrl(pageNum);
-      const response = await $fetch<ProductsResponse>(url);
+      let response: ProductsResponse | null = null;
+
+      if (ssr) {
+        response = await fetchProductsWithSSR(pageNum);
+      } else {
+        response = await fetchProductsWithClient(pageNum);
+      }
+
       if (!response) throw new Error("Error fetching products");
 
       if (append && pageNum > 1) {
@@ -46,16 +57,32 @@ export const useProductStore = defineStore("products", () => {
 
       page.value = pageNum;
       hasMore.value = response.currentPage < response.totalPages;
-      total.value = response.total;
-      totalPages.value = response.totalPages;
     } catch (err: unknown) {
-      console.error("Error fetching products:", err);
+      handleError(err, append);
+    } finally {
+      loading.value = false;
+    }
+  };
 
-      if (!err || typeof err !== "object") {
-        error.value = "Произошла ошибка при загрузке товаров";
-        return;
+  const handleError = (err: unknown, append: boolean) => {
+    console.error("Error fetching products:", err);
+
+    if (err instanceof H3Error) {
+      if (err.statusCode === 404) {
+        error.value = "Товары не найдены";
+      } else if (err.statusCode === 500) {
+        error.value = "Ошибка сервера, попробуйте позже";
+      } else {
+        error.value = err.message || "Произошла ошибка при загрузке товаров";
       }
 
+      if (!append) {
+        products.value = [];
+      }
+      return;
+    }
+
+    if (err && typeof err === "object" && "response" in err) {
       const fetchError = err as FetchError;
 
       if (fetchError.response?.status === 404) {
@@ -75,33 +102,32 @@ export const useProductStore = defineStore("products", () => {
       if (!append) {
         products.value = [];
       }
-    } finally {
-      loading.value = false;
+      return;
+    }
+
+    if (err instanceof Error) {
+      error.value = err.message;
+    } else {
+      error.value = "Произошла ошибка при загрузке товаров";
+    }
+
+    if (!append) {
+      products.value = [];
     }
   };
 
-  const fetchFirstPage = async () => {
+  const fetchFirstPageSSR = async () => {
     page.value = 1;
-    await fetchProducts(1, false);
+    await fetchProducts(1, false, true);
   };
 
   const loadMore = async () => {
     if (!hasMore.value || loading.value) return;
-    await fetchProducts(page.value + 1, true);
+    await fetchProducts(page.value + 1, true, false);
   };
 
   const retry = async () => {
-    await fetchProducts(page.value, page.value > 1);
-  };
-
-  const reset = () => {
-    products.value = [];
-    page.value = 1;
-    hasMore.value = true;
-    error.value = null;
-    loading.value = false;
-    total.value = 0;
-    totalPages.value = 0;
+    await fetchProducts(page.value, page.value > 1, false);
   };
 
   return {
@@ -109,19 +135,9 @@ export const useProductStore = defineStore("products", () => {
     loading,
     error,
     page,
-    limit,
     hasMore,
-    total,
-    totalPages,
-
-    isLoading,
-    hasError,
-    productsCount,
-
-    fetchProducts,
-    fetchFirstPage,
+    fetchFirstPageSSR,
     loadMore,
     retry,
-    reset,
   };
 });
