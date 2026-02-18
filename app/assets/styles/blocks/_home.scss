@@ -10,13 +10,6 @@
 
   &__container {
     @include container;
-
-    @include media-up("desktop") {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-    }
   }
 
   &__title {
