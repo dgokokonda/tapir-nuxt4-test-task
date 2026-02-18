@@ -1,18 +1,32 @@
 import { defineStore } from "pinia";
 import type { Product, FetchError, ProductsResponse } from "~/types/product";
-import { API } from "@/constants/api";
 import { useProductsFetch } from "~/composables/useProductsFetch";
+import { useCatalogRoute } from "~/composables/useCatalogRoute";
 import { H3Error } from "h3";
 
 export const useProductStore = defineStore("products", () => {
   const products = ref<Product[]>([]);
   const loading = ref<boolean>(false);
   const error = ref<string | null>(null);
-  const page = ref<number>(1);
-  const limit = ref<number>(API.LIMIT);
   const hasMore = ref<boolean>(true);
 
+  const {
+    page,
+    limit,
+    updatingFromStore,
+    initFromRoute,
+    updateWithFlag,
+    watchRoute,
+  } = useCatalogRoute();
+
   const { fetchProductsSSR, fetchProductsClient } = useProductsFetch();
+
+  watchRoute(async (urlPage, urlLimit) => {
+    if (urlLimit !== limit.value) {
+      limit.value = urlLimit;
+    }
+    await fetchProducts(urlPage, false, false);
+  });
 
   const fetchProductsWithSSR = async (pageNum: number) => {
     const result = await fetchProductsSSR(pageNum, limit.value);
@@ -57,6 +71,11 @@ export const useProductStore = defineStore("products", () => {
 
       page.value = pageNum;
       hasMore.value = response.currentPage < response.totalPages;
+
+      // Обновляем URL только для клиентских запросов (не в SSR)
+      if (!ssr && !updatingFromStore.value) {
+        updateWithFlag(pageNum);
+      }
     } catch (err: unknown) {
       handleError(err, append);
     } finally {
@@ -117,8 +136,9 @@ export const useProductStore = defineStore("products", () => {
   };
 
   const fetchFirstPageSSR = async () => {
+    initFromRoute();
     page.value = 1;
-    await fetchProducts(1, false, true);
+    await fetchProducts(page.value, false, true);
   };
 
   const loadMore = async () => {
