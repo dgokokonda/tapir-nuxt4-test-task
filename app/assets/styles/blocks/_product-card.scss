@@ -24,27 +24,38 @@
     }
   }
 
-  &__image {
-    // aspect-ratio: 1;
-    margin-bottom: 31px;
-    overflow: hidden;
+  &__image-wrapper {
     width: 100%;
-    height: 180px;
+    aspect-ratio: 16 / 10;
+    min-height: 180px;
+    overflow: hidden;
+    margin-bottom: 31px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: $color-gray;
 
     @include media-up("desktop") {
+      min-height: 93.1px;
       margin-bottom: 15px;
-      height: 93.1px;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s ease;
+    object-fit: cover;
+
+    // &[data-orientation="landscape"],
+    &--landscape {
+      object-fit: contain;
+      // padding: 10px;
     }
 
-    img {
-      object-fit: cover;
+    &__image {
       width: 100%;
-      max-width: 100%;
-      max-height: 100%;
+      height: 100%;
+      transition: transform 0.3s ease;
     }
   }
 
